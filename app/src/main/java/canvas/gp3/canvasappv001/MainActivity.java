@@ -26,10 +26,18 @@ public class MainActivity extends AppCompatActivity {
     }
     
     public void paintClicked(View view){    //lets user choose colour
+       
         //check paint colour selected is not current one
         if(view != currPaint){  //update colour
             ImageButton imgView = (ImageButton)view;
-            String color = view.getTag().toString();
+            String color = view.getTag().toString();            
         }
+        
+        drawView.setColor(color);
+        
+        //updates user interface to show the new colour selection
+        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+        currPaint=(ImageButton)view;
     }
 }
