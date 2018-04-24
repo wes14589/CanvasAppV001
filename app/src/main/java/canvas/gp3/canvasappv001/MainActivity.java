@@ -24,4 +24,12 @@ public class MainActivity extends AppCompatActivity {
         currPaint = (ImageButton)paintLayout.getChildAt(0); //retrive first button
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));   //use image on button to show current selection
     }
+    
+    public void paintClicked(View view){    //lets user choose colour
+        //check paint colour selected is not current one
+        if(view != currPaint){  //update colour
+            ImageButton imgView = (ImageButton)view;
+            string color = view.getTag().toString();
+        }
+    }
 }
