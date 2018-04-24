@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //check paint colour selected is not current one
         if(view != currPaint){  //update colour
             ImageButton imgView = (ImageButton)view;
-            string color = view.getTag().toString();
+            String color = view.getTag().toString();
         }
     }
 }
