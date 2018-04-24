@@ -81,9 +81,11 @@ public class DrawingView extends View {
         }
         
         invalidate();   //onDraw method executes
-        return true;
-    
-    
+        return true;        
     }    
+    
+    public void setColor(String newColor){  //sets colour
+    
+    }
 }
 
