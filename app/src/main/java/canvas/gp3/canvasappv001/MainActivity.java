@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         drawView.setColor(color);
         
         //updates user interface to show the new colour selection
-        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-        currPaint=(ImageButton)view;
+        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed)); //turn button clicked to black
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));   //turn previous button to grey
+        currPaint=(ImageButton)view;    //button clicked is now currPaint
     }
 }
