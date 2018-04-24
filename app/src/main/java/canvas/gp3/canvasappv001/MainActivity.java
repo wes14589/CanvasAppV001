@@ -19,8 +19,9 @@ public class MainActivity extends AppCompatActivity {
         
         drawView = (DrawingView)findViewById(R.id.drawing); //instantiation of variable by retrieving a reference to it from the layout
         
-        LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
-        currPaint = (ImageButton)paintLayout.getChildAt(0);
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        //retrieve first paint colour button in palette
+        LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);   //retrieve linear layout
+        currPaint = (ImageButton)paintLayout.getChildAt(0); //retrive first button
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));   //use image on button to show current selection
     }
 }
