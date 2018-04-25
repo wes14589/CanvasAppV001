@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+
 public class MainActivity extends AppCompatActivity {
     
     private DrawingView drawView;   //instance variable
@@ -25,19 +26,22 @@ public class MainActivity extends AppCompatActivity {
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));   //use image on button to show current selection
     }
     
-    public void paintClicked(View view){    //lets user choose colour
-       
+    public void paintClicked(View view) {    //lets user choose colour
+        String color = null;
         //check paint colour selected is not current one
-        if(view != currPaint){  //update colour
-            ImageButton imgView = (ImageButton)view;
-            String color = view.getTag().toString();            
+        ImageButton imgView = null;
+        if (view != currPaint) {  //update colour
+            imgView = (ImageButton) view;
+            color = view.getTag().toString();
         }
-        
+
         drawView.setColor(color);
-        
+
         //updates user interface to show the new colour selection
         imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed)); //turn button clicked to black
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));   //turn previous button to grey
-        currPaint=(ImageButton)view;    //button clicked is now currPaint
+        currPaint = (ImageButton) view;    //button clicked is now currPaint
     }
+
+
 }
