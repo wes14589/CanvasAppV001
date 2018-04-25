@@ -129,4 +129,12 @@ public class DrawingView extends View {
         else drawPaint.setXfermode(null);
 
     }
+
+    public void startNew(){ //start a new drawing
+        drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR); //sets blank page
+        invalidate();
+    }
+
+
 }
+
