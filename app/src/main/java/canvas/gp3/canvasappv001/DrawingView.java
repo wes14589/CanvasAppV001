@@ -9,6 +9,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.util.TypedValue;
 
 public class DrawingView extends View {
 
@@ -17,6 +20,8 @@ public class DrawingView extends View {
     private int paintColor = 0xFF660000;    //initial paint colour
     private Canvas drawCanvas;  //the canvas
     private Bitmap canvasBitmap;    //bitmap representation of canvas
+    private float brushSize, lastBrushSize; //lastBrushSize keeps track of brush size when switched to eraser
+    private boolean erase = false;     //flag to whether user erases or not
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -26,18 +31,37 @@ public class DrawingView extends View {
     private void setupDrawing(){    //get drawing area setup for interaction
 
         //INSTANTIATE VARIABLES
+        brushSize = getResources().getInteger(R.integer.medium_size);
+        lastBrushSize = brushSize;  //assigns current brush size to this for easy reverting back
+
         drawPath = new Path();  //draws the path for the user
         drawPaint = new Paint();    //draws the paint on the canvas in place of the user's path
 
         drawPaint.setColor(paintColor); //initialises paint colour
 
         drawPaint.setAntiAlias(true);   //All initialisations here make the drawing appear smoother
-        drawPaint.setStrokeWidth(20);   //arbitary brush size until alteration of sizes
+        drawPaint.setStrokeWidth(brushSize);   //arbitary brush size until alteration of sizes
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
         canvasPaint = new Paint(Paint.DITHER_FLAG);
+    }
+
+    public void setBrushSize(float newSize){    //updates brush size
+
+        //value is passed from dimensions file
+        float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, newSize, getResources().getDisplayMetrics());
+        brushSize = pixelAmount;
+        drawPaint.setStrokeWidth(brushSize);
+    }
+
+    public void setLastBrushSize(float lastSize){   //sets the last brush size  //called from MainActivity
+        lastBrushSize = lastSize;
+    }
+
+    public float getLastBrushSize(){    //retrieves the last brush size     //called from MainActivity
+        return lastBrushSize;
     }
 
     @Override
@@ -93,5 +117,16 @@ public class DrawingView extends View {
 
         paintColor = Color.parseColor(newColor);    //sets the colour for drawing
         drawPaint.setColor(paintColor);
+    }
+
+    public void setErase(boolean isErase){      //setting erase to true or false
+
+        erase = isErase;    //updates variable
+
+        if(erase) { //erase or switch back to drawing
+            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        }
+        else drawPaint.setXfermode(null);
+
     }
 }
